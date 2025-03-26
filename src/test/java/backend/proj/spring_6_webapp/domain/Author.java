@@ -3,6 +3,7 @@ package backend.proj.spring_6_webapp.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 import java.util.Set;
 
@@ -16,6 +17,7 @@ public class Author {
     private String firstname;
     private String lastname;
 
+    @ManyToMany(mappedBy = "authors")
     private Set<Book> books;
 
     public Set<Book> getBooks() {

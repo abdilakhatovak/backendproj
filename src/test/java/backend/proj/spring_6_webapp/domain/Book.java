@@ -1,8 +1,6 @@
 package backend.proj.spring_6_webapp.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
@@ -16,6 +14,9 @@ public class Book {
     private String title;
     private String isbn;
 
+    @ManyToMany
+    @JoinTable(name = "author_book", joinColumns = @JoinColumn (name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id") )
     private Set<Author> authors;
 
     public Set<Author> getAuthors() {
