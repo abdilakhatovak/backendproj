@@ -2,8 +2,10 @@ package backend.proj.spring_6_webapp.bootstrap;
 
 import backend.proj.spring_6_webapp.domain.Author;
 import backend.proj.spring_6_webapp.domain.Book;
+import backend.proj.spring_6_webapp.domain.Publisher;
 import backend.proj.spring_6_webapp.repositories.AuthorRepository;
 import backend.proj.spring_6_webapp.repositories.BookRepository;
+import backend.proj.spring_6_webapp.repositories.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -45,12 +47,24 @@ public class BootstrapData implements CommandLineRunner {
         ericSaved.getBooks().add(dddSaved);
         rodSaved.getBooks().add(noEJBSaved);
 
+        Publisher publisher = new Publisher();
+        publisher.setPublisherName("My publisher");
+        publisher.setAddress("123 Main");
+        Publisher savedPublisher = PublisherRepository.save(publisher);
+
+        dddSaved.setPublisher(savedPublisher);
+        noEJBSaved.setPublisher(savedPublisher);
+
         authorRepository.save(ericSaved);
         authorRepository.save(rodSaved);
 
         System.out.println("In Bootstrap");
         System.out.println("Author Count:" + authorRepository.count());
         System.out.println("Book Count:" + bookRepository.count());
+
+
+
+        System.out.println("Publisher Count: " + PublisherRepository.count());
 
 
     }
